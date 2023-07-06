@@ -6,7 +6,7 @@ const Demo = () => {
 
     const [num,setNum]=useState(0);
 
-    const [isDark,SetIsDark]=useState(true  );
+    const [isDark,SetIsDark]=useState(true);
 
     //costly operation
    // const prime=findPrime(num);

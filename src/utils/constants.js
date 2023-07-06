@@ -6,3 +6,7 @@ export const YOUTUBE_URL='https://youtube.googleapis.com/youtube/v3/videos?maxRe
 
 
 export const YOUTUBE_SUGGESITION_API='http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=';
+
+
+
+export const SEARCH_API='https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&type=video&key='+API_KEY+'&q=';

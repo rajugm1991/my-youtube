@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link,useNavigate,withRouter } from "react-router-dom";
 import { toggleMenu } from "../utils/appSlice";
 import { YOUTUBE_SUGGESITION_API } from "../utils/constants";
 import { storeSearchCache } from "../utils/searchSlice";
@@ -8,6 +8,11 @@ import { storeSearchCache } from "../utils/searchSlice";
 const Head = () => {
 
     const dispatch=useDispatch();
+ 
+    let navigate = useNavigate();
+
+
+    const [selectQuerySearch,setSelectQuerySearch] =useState('');
 
     const [showSuggestion,setShowSuggestion]=useState(false);
 
@@ -16,6 +21,8 @@ const Head = () => {
     const [searchQuery,setSearchQuery]=useState('');
 
     const searchCache=useSelector(store=>store.search);
+
+    console.log(selectQuerySearch);
 
     useEffect(()=>{
       const timer=  setTimeout(()=>{
@@ -74,11 +81,13 @@ const Head = () => {
           onFocus={()=>setShowSuggestion(true)}
           onBlur={()=>setShowSuggestion(false)}
         />
-        <button className="border border-gray-400 p-2 rounded-r-full">Search</button>
+        <button className="border border-gray-400 p-2 rounded-r-full" onClick={()=>navigate(`/searchResult?search_query=${searchQuery}`)}>Search</button>
 
       {searchResults.length>0&&showSuggestion&&<div className="fixed bg-white px-5 py-2 w-[30rem] shadow-lg border border-gray-100">
             <ul>
-              {searchResults.map((res)=><li className="py-2 px-3 shadow-sm hover:bg-gray-100">🔍 {res}</li>)}  
+              {searchResults.map((res)=>
+               <Link onMouseDown={()=>{setSearchQuery(res);navigate(`/searchResult?search_query=${res}`)}} ><li className="py-2 px-3 shadow-sm hover:bg-gray-100 cursor-pointer">
+                🔍{res} </li></Link>)}  
             </ul>
         </div>}
       </div>

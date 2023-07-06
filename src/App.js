@@ -4,6 +4,7 @@ import './App.css';
 import Body from './components/Body';
 import Demo from './components/Demo';
 import Demo2 from './components/Demo2';
+import GlobalSearchResults from './components/GlobalSearchResults';
 import Head from './components/Head';
 import MainContainer from './components/MainContainer';
 import VideoInfo from './components/VideoInfo';
@@ -14,7 +15,7 @@ function App() {
   const router=createBrowserRouter([
     {
       path :'/',
-      element : <Body/>,
+      element :  <><Head/>  <Body/></>,
       children : [
          {
             path :'/',
@@ -27,6 +28,10 @@ function App() {
          {
           path :'demo',
           element :<><Demo/> <Demo2/></>
+         },
+         {
+          path :'searchResult',
+          element :<GlobalSearchResults/>
          }
       ]
     },
@@ -37,7 +42,6 @@ function App() {
   return (
     <div className="App">
       <Provider store={store}>
-      <Head/> 
       <RouterProvider router={router}/>
       </Provider>
     </div>
